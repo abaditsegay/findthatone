@@ -21,8 +21,16 @@ backend/logs/*
 !backend/logs/.gitkeep
 
 # Uploads
-**/uploads/
-backend/uploads/
+**/uploads/*
+!**/uploads/.gitkeep
+!**/uploads/photos/
+**/uploads/photos/*
+!**/uploads/photos/.gitkeep
+backend/uploads/*
+!backend/uploads/.gitkeep
+!backend/uploads/photos/
+backend/uploads/photos/*
+!backend/uploads/photos/.gitkeep
 
 # Environment files
 .env
