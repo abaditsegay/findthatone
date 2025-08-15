@@ -1,0 +1,17 @@
+Deployment completed at: Thu Aug 14 21:21:18 EDT 2025
+Instance ID: i-09d9658fe1239835f
+Public IP: 18.215.217.246
+VPC ID: vpc-0391bb45de6af24ec
+Subnet ID: subnet-0bedd81d2dce5517a
+Security Group ID: sg-0b96f7b48aed831a5
+Elastic IP Allocation: eipalloc-0a7570e75dcabe948
+
+SSH Command: ssh -i ~/.ssh/findthatone-keypair ubuntu@18.215.217.246
+Frontend URL: http://18.215.217.246
+Backend API: http://18.215.217.246:8091/api
+Health Check: http://18.215.217.246:8091/api/test
+
+Monitoring Commands:
+- Check user-data progress: ssh -i ~/.ssh/findthatone-keypair ubuntu@18.215.217.246 'tail -f /var/log/user-data.log'
+- Check backend service: ssh -i ~/.ssh/findthatone-keypair ubuntu@18.215.217.246 'sudo systemctl status findtheone-backend'
+- Check backend logs: ssh -i ~/.ssh/findthatone-keypair ubuntu@18.215.217.246 'sudo journalctl -u findtheone-backend -f'

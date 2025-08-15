@@ -1,0 +1,284 @@
+.coin-store-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.coin-store-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.coin-store-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.coin-store-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.current-balance {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.balance-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.coin-icon {
+  font-size: 1.5rem;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.package-card {
+  border: 2px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.package-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.1);
+}
+
+.package-card.popular {
+  border-color: #ff6b6b;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: white;
+  transform: scale(1.05);
+}
+
+.package-card.popular:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6b6b;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.package-card.popular .popular-badge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.package-header h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+
+.coin-amount {
+  margin-bottom: 15px;
+}
+
+.coins {
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.coin-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  display: block;
+}
+
+.bonus {
+  background: #4ecdc4;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.package-card.popular .bonus {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.package-price {
+  margin: 15px 0;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.package-card.popular .price {
+  color: white;
+}
+
+.package-value {
+  margin-bottom: 20px;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.purchase-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.purchase-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.purchase-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.package-card.popular .purchase-btn {
+  background: white;
+  color: #ff6b6b;
+}
+
+.package-card.popular .purchase-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.store-info {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #e9ecef;
+}
+
+.store-info h4 {
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.store-info ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.store-info li {
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.error-message {
+  background: #fee;
+  color: #c33;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #fcc;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.success-message {
+  background: #efe;
+  color: #3c3;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #cfc;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coin-store-modal {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .packages-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .package-card.popular {
+    transform: none;
+  }
+  
+  .package-card.popular:hover {
+    transform: translateY(-2px);
+  }
+}

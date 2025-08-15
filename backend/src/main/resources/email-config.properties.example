@@ -1,0 +1,39 @@
+# Development Email Configuration
+# Copy this file to application-local.properties and configure with your email settings
+
+# Gmail SMTP Configuration (recommended for development)
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-email@gmail.com
+spring.mail.password=your-app-password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+
+# Frontend URL for email links
+app.frontend.url=http://localhost:3001
+
+# For Gmail, you need to:
+# 1. Enable 2-factor authentication
+# 2. Generate an "App Password" specifically for this application
+# 3. Use the app password instead of your regular Gmail password
+
+# Alternative providers:
+# 
+# Mailgun:
+# spring.mail.host=smtp.mailgun.org
+# spring.mail.port=587
+# spring.mail.username=postmaster@yourdomain.mailgun.org
+# spring.mail.password=your-mailgun-password
+#
+# SendGrid:
+# spring.mail.host=smtp.sendgrid.net
+# spring.mail.port=587
+# spring.mail.username=apikey
+# spring.mail.password=your-sendgrid-api-key
+#
+# Amazon SES:
+# spring.mail.host=email-smtp.us-east-1.amazonaws.com
+# spring.mail.port=587
+# spring.mail.username=your-aws-access-key
+# spring.mail.password=your-aws-secret-key

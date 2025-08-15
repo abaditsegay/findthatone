@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    
+    <!-- Define properties -->
+    <springProfile name="!azure">
+        <property name="LOG_PATH" value="./logs"/>
+    </springProfile>
+    <springProfile name="azure">
+        <property name="LOG_PATH" value="/tmp/logs"/>
+    </springProfile>
+    
+    <!-- File Appender for Development (replaces console) -->
+    <springProfile name="local,docker">
+        <appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/development.log</file>
+            <encoder>
+                <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+                <charset>utf8</charset>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/development.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>50MB</maxFileSize>
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>500MB</totalSizeCap>
+            </rollingPolicy>
+        </appender>
+    </springProfile>
+    
+    <!-- Console Appender with Colored Output for Development (Optional) -->
+    <springProfile name="local,docker">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n</pattern>
+                <charset>utf8</charset>
+            </encoder>
+            <!-- Only log WARN and above to console -->
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>WARN</level>
+            </filter>
+        </appender>
+    </springProfile>
+    
+    <!-- JSON File Appender for Production -->
+    <springProfile name="azure">
+        <appender name="PROD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/production.log</file>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <includeContext>true</includeContext>
+                <includeMdc>true</includeMdc>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/production.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>100MB</maxFileSize>
+                <maxHistory>30</maxHistory>
+                <totalSizeCap>2GB</totalSizeCap>
+            </rollingPolicy>
+        </appender>
+    </springProfile>
+    
+    <!-- Rolling File Appender for Application Logs -->
+    <appender name="APPLICATION_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/application.log</file>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <logLevel/>
+                <loggerName/>
+                <message/>
+                <mdc/>
+                <arguments/>
+                <stackTrace/>
+            </providers>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/application.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- Rolling File Appender for Security Events -->
+    <appender name="SECURITY_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/security.log</file>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <logLevel/>
+                <loggerName/>
+                <message/>
+                <mdc/>
+                <arguments/>
+                <stackTrace/>
+            </providers>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/security.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>90</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+    <!-- Async Appenders for Performance -->
+    <appender name="ASYNC_APPLICATION" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="APPLICATION_FILE"/>
+        <queueSize>512</queueSize>
+        <discardingThreshold>20</discardingThreshold>
+        <maxFlushTime>1000</maxFlushTime>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+    
+    <appender name="ASYNC_SECURITY" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="SECURITY_FILE"/>
+        <queueSize>256</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <maxFlushTime>1000</maxFlushTime>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+    
+    <!-- Logger Configurations -->
+    
+    <!-- Application Loggers -->
+    <springProfile name="local,docker">
+        <logger name="com.findtheone" level="DEBUG" additivity="false">
+            <appender-ref ref="DEV_FILE"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_APPLICATION"/>
+        </logger>
+    </springProfile>
+    
+    <springProfile name="azure">
+        <logger name="com.findtheone" level="INFO" additivity="false">
+            <appender-ref ref="PROD_FILE"/>
+            <appender-ref ref="ASYNC_APPLICATION"/>
+        </logger>
+    </springProfile>
+    
+    <!-- Security Logger -->
+    <springProfile name="local,docker">
+        <logger name="com.findtheone.security" level="WARN" additivity="false">
+            <appender-ref ref="DEV_FILE"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_SECURITY"/>
+        </logger>
+    </springProfile>
+    
+    <springProfile name="azure">
+        <logger name="com.findtheone.security" level="WARN" additivity="false">
+            <appender-ref ref="PROD_FILE"/>
+            <appender-ref ref="ASYNC_SECURITY"/>
+        </logger>
+    </springProfile>
+    
+    <!-- Authentication/Authorization Logger -->
+    <springProfile name="local,docker">
+        <logger name="com.findtheone.controller.AuthController" level="INFO" additivity="false">
+            <appender-ref ref="DEV_FILE"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_APPLICATION"/>
+            <appender-ref ref="ASYNC_SECURITY"/>
+        </logger>
+    </springProfile>
+    
+    <springProfile name="azure">
+        <logger name="com.findtheone.controller.AuthController" level="INFO" additivity="false">
+            <appender-ref ref="PROD_FILE"/>
+            <appender-ref ref="ASYNC_APPLICATION"/>
+            <appender-ref ref="ASYNC_SECURITY"/>
+        </logger>
+    </springProfile>
+    
+    <!-- Database Query Logger for Development -->
+    <springProfile name="local,docker">
+        <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+            <appender-ref ref="DEV_FILE"/>
+        </logger>
+        <logger name="org.hibernate.type" level="TRACE" additivity="false">
+            <appender-ref ref="DEV_FILE"/>
+        </logger>
+    </springProfile>
+    
+    <!-- Third-party Library Loggers -->
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.boot.actuate" level="WARN"/>
+    <logger name="com.mysql" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <logger name="io.jsonwebtoken" level="WARN"/>
+    
+    <!-- Root Logger -->
+    <springProfile name="local,docker">
+        <root level="INFO">
+            <appender-ref ref="DEV_FILE"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_APPLICATION"/>
+        </root>
+    </springProfile>
+    
+    <springProfile name="azure">
+        <root level="WARN">
+            <appender-ref ref="PROD_FILE"/>
+            <appender-ref ref="ASYNC_APPLICATION"/>
+        </root>
+    </springProfile>
+    
+</configuration>
