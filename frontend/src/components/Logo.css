@@ -1,0 +1,34 @@
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container svg {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logo-container {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container {
+    transform: scale(0.7);
+  }
+}
+
+/* Animation for hover effect */
+.logo-container:hover svg {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.logo-container svg {
+  transition: transform 0.3s ease;
+}

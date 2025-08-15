@@ -1,0 +1,32 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ee5a52;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff8a80;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Heart Icon -->
+  <g transform="translate(10, 15)">
+    <path d="M15 25c-5-10-15-10-15-2.5C0 30 15 35 15 35s15-5 15-12.5c0-7.5-10-7.5-15 2.5z" 
+          fill="url(#heartGradient)" 
+          stroke="#fff" 
+          stroke-width="1"/>
+    <!-- Small sparkle -->
+    <circle cx="25" cy="10" r="1.5" fill="#ffd700" opacity="0.8"/>
+    <circle cx="5" cy="12" r="1" fill="#ffd700" opacity="0.6"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="45" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="url(#textGradient)">Find</text>
+  <text x="45" y="42" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#666">The</text>
+  <text x="75" y="42" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="url(#textGradient)">One</text>
+  
+  <!-- Connection line -->
+  <path d="M130 20 Q140 15 150 20 Q160 25 170 20" stroke="url(#heartGradient)" stroke-width="2" fill="none" opacity="0.7"/>
+</svg>

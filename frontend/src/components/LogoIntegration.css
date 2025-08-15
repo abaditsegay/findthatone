@@ -1,0 +1,75 @@
+/* Logo Integration Styles */
+
+/* Dashboard Header Logo */
+.dashboard-header .logo-container {
+  margin-right: 20px;
+}
+
+/* Auth Pages Logo */
+.auth-header .logo-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Navigation Logo */
+.nav-brand .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Chat Navigation Logo */
+.chat-nav .logo-container {
+  margin-right: 15px;
+}
+
+/* Profile Navigation Logo */
+.profile-nav .logo-container {
+  margin-right: 15px;
+}
+
+/* Matches Navigation Logo */
+.matches-nav .logo-container {
+  margin-right: 15px;
+}
+
+/* Responsive Logo Adjustments */
+@media (max-width: 768px) {
+  .dashboard-header .logo-container {
+    margin-right: 10px;
+  }
+  
+  .nav-brand .logo-container {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-header .logo-container {
+    transform: scale(0.8);
+  }
+  
+  .dashboard-header .logo-container {
+    margin-right: 8px;
+  }
+  
+  .nav-brand .logo-container {
+    transform: scale(0.8);
+  }
+}
+
+/* Logo hover effects for interactive elements */
+.nav-brand .logo-container:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+/* Ensure logos don't interfere with existing layouts */
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-content .logo-container {
+  flex-shrink: 0;
+}

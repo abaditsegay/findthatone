@@ -1,0 +1,49 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#ee5a52;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#ff8a80;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffcdd2;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background with rounded corners -->
+  <rect x="12" y="12" width="168" height="168" rx="32" ry="32" 
+        fill="url(#bgGradient)" 
+        stroke="url(#borderGradient)" 
+        stroke-width="3"/>
+  
+  <!-- Heart Icon -->
+  <g transform="translate(96, 96)">
+    <path d="M0 20c-15-30-45-30-45-7.5C-45 40 0 65 0 65s45-25 45-52.5c0-22.5-30-22.5-45 7.5z" 
+          fill="url(#heartGradient)" 
+          stroke="#fff" 
+          stroke-width="2"/>
+    <!-- Sparkles -->
+    <circle cx="30" cy="-15" r="4" fill="#ffd700" opacity="0.9"/>
+    <circle cx="-25" cy="-5" r="3" fill="#ffd700" opacity="0.8"/>
+    <circle cx="35" cy="15" r="2.5" fill="#ffd700" opacity="0.7"/>
+    <circle cx="-35" cy="10" r="2" fill="#ffd700" opacity="0.6"/>
+    
+    <!-- Small hearts floating -->
+    <g transform="translate(25, -25) scale(0.3)" opacity="0.7">
+      <path d="M0 6c-3-6-9-6-9-1.5C-9 10 0 13 0 13s9-3 9-8.5c0-4.5-6-4.5-9 1.5z" fill="#ff8a80"/>
+    </g>
+    <g transform="translate(-30, -15) scale(0.25)" opacity="0.6">
+      <path d="M0 6c-3-6-9-6-9-1.5C-9 10 0 13 0 13s9-3 9-8.5c0-4.5-6-4.5-9 1.5z" fill="#ffcdd2"/>
+    </g>
+  </g>
+  
+  <!-- Bottom text -->
+  <text x="96" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="url(#borderGradient)">FindTheOne</text>
+</svg>

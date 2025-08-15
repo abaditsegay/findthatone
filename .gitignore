@@ -15,8 +15,10 @@ terraform-ec2/tfplan
 
 # Logs
 *.log
-**/logs/
-backend/logs/
+**/logs/*
+!**/logs/.gitkeep
+backend/logs/*
+!backend/logs/.gitkeep
 
 # Uploads
 **/uploads/

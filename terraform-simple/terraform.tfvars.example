@@ -1,0 +1,22 @@
+# Example Terraform variables for FindThatOne deployment
+# Copy this file to terraform.tfvars and update with your values
+
+# AWS Configuration
+aws_region = "us-east-1"
+
+# Project Configuration
+project_name = "findthatone"
+
+# EC2 Configuration
+instance_type = "t3.medium"
+
+# SSH Key Configuration
+# Generate a key pair first: ssh-keygen -t rsa -b 2048 -f ~/.ssh/findthatone-keypair
+# Then paste the public key content here
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ... your-public-key-here"
+
+# Database Configuration
+mysql_root_password = "FindTheOne2024!"
+
+# Security Configuration
+jwt_secret = "mySecretKey12345678901234567890"
